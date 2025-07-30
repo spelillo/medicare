@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .logo-fade {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
+    }
+    .logo-fade.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicare Mobile App Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #18706e 0%, #95b4b3 100%);
+      transition: background 0.7s cubic-bezier(.4,0,.2,1);
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+    .login-panel {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+      border: 1.5px solid #e0e0e0;
+      max-width: 420px;
+      width: 100%;
+      padding: 2.5rem 2rem 2rem 2rem;
+      margin: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .login-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2d3a4a;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+    .input-group {
+      margin-bottom: 1.2rem;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      color: #222;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 0.9rem 0.8rem;
+      border: 2px solid #bfc9d1;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      background: #fff;
+      transition: border 0.2s;
+      outline: none;
+      margin-bottom: 0.2rem;
+      box-sizing: border-box;
+    }
+    .input-group input:focus {
+      border-color: #18706e;
+      background: #f5fff8;
+    }
+    .save-username-box {
+      background: #e9f1fb;
+      border-radius: 7px;
+      padding: 1rem 1.1rem 1rem 1.1rem;
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 1rem;
+      border: none;
+    }
+    .save-username-box input[type="checkbox"] {
+      margin-top: 0.2rem;
+      accent-color: #1a5a96;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+    .save-username-info {
+      font-size: 1.05rem;
+      color: #222;
+    }
+    .save-username-info b {
+      font-weight: 700;
+      display: block;
+      margin-top: 0.1rem;
+    }
+    .save-username-info a {
+      color: #1a5a96;
+      text-decoration: underline;
+      font-size: 1.01rem;
+      font-weight: 500;
+      margin-left: 0.1rem;
+    }
+    .password-row {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .password-row input[type="password"],
+    .password-row input[type="text"] {
+      flex: 1;
+      margin-right: 0;
+    }
+    .show-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #222;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .show-toggle:before {
+      content: '\1F441'; /* eye icon */
+      font-size: 1.1rem;
+      margin-right: 0.3rem;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #18706e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.7rem;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px rgba(24,112,110,0.08);
+    }
+    .login-btn:hover, .login-btn:focus {
+      background: #0e4d4b;
+    }
+    .error {
+      color: #b00020;
+      background: #ffeaea;
+      border-radius: 7px;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      border: 1px solid #f5c2c7;
+    }
+    .forgot-link {
+      display: block;
+      margin-top: 1.2rem;
+      text-align: left;
+      font-size: 1.08rem;
+      color: #1a5a96;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .login-panel { padding: 1.2rem 0.5rem; }
+      .login-title { font-size: 1.4rem; }
+      #home-inner-container {
+        max-width: 100vw !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+      }
+      #home-page {
+        align-items: stretch !important;
+        width: 100vw !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="home-page" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f7fbfd;padding:0;margin:0;">
+    <div style="width:100%;max-width:480px;margin:2.5rem auto 0 auto;background:#fff;border-radius:18px;padding:0;box-shadow:0 2px 8px rgba(44,62,80,0.08);position:relative;overflow:hidden;">
+      <!-- Header Bar -->
+      <div style="background:#f7fbfd;padding:0.7rem 1.2rem 0.7rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #e0e0e0;">
+        <img src="Medicare.gov.avif" alt="Medicare.gov logo" style="height:80px;width:150px;" />
+        <button id="menu-btn" style="background:none;border:2px solid #18706e;border-radius:7px;padding:0.4rem 1.1rem;font-size:1.1rem;font-weight:600;color:#18706e;cursor:pointer;display:flex;align-items:center;gap:0.5rem;">
+          <span style="font-size:1.2rem;">&#9776;</span> Menu
+        </button>
+        <!-- Side Menu Popup -->
+          <div id="side-menu" style="position:fixed;top:0;right:0;height:100vh;width:340px;max-width:95vw;background:#fff;box-shadow:-2px 0 16px rgba(44,62,80,0.13);z-index:3000;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1.3rem 1.2rem 1.1rem 1.2rem;border-bottom:1.5px solid #e0e0e0;">
+              <span style="font-size:2rem;font-weight:700;color:#2d3a4a;">Menu</span>
+              <button id="close-side-menu" style="background:none;border:none;font-size:2rem;cursor:pointer;color:#222;">&times;</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.2rem;padding:0.7rem 0;">
+              <button id="side-menu-basics-btn" style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+                Basics <span style="font-size:1.2rem;">&#8250;</span>
+              </button>
+              <script>
+                // Show Get Started modal when Basics is pressed in side menu
+                document.addEventListener('DOMContentLoaded', function() {
+                  const basicsBtn = document.getElementById('side-menu-basics-btn');
+                  const getStartedModal = document.getElementById('get-started-modal');
+                  const getStartedHtmlContainer = document.getElementById('get-started-html-container');
+                  if (basicsBtn && getStartedModal && getStartedHtmlContainer) {
+                    basicsBtn.addEventListener('click', function() {
+                      // Close side menu
+                      document.getElementById('side-menu').style.transform = 'translateX(100%)';
+                      document.getElementById('side-menu-backdrop').style.display = 'none';
+                      // Show modal and load content
+                      getStartedModal.style.display = 'flex';
+                      fetch('getstarted.html')
+                        .then(res => res.text())
+                        .then(html => {
+                          getStartedHtmlContainer.innerHTML = html;
+                        })
+                        .catch(() => {
+                          getStartedHtmlContainer.innerHTML = '<div style="padding:2rem;text-align:center;color:#b00020;">Could not load content.</div>';
+                        });
+                    });
+                  }
+                });
+              </script>
+              <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+                Health &amp; Drug Plans <span style="font-size:1.2rem;">&#8250;</span>
+              </button>
+              <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+                Providers &amp; Services <span style="font-size:1.2rem;">&#8250;</span>
+              </button>
+                <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+                <span>
+                  <img class="ch-u-margin-right--8px" src="https://frontend.medicare.gov/assets/Icon_Chat-f1ad62dd.svg" alt="" style="height:1.2em;width:auto;vertical-align:middle;margin-right:0.5rem;">
+                  Chat
+                </span>
+                <span style="font-size:1.2rem;">&#8250;</span>
+                </button>
+              <div style="padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;cursor:pointer;">
+                Cambiar a español
+              </div>
+              <div style="padding:1.1rem 1.2rem;">
+                <button id="side-menu-login-btn" style="width:100%;background:#18706e;color:#fff;border:none;border-radius:6px;padding:0.9rem 0;font-size:1.13rem;font-weight:700;cursor:pointer;">Log in</button>
+              </div>
+              <script>
+                // Open login panel from side menu
+                document.addEventListener('DOMContentLoaded', function() {
+                  var loginBtn = document.getElementById('side-menu-login-btn');
+                  if (loginBtn) {
+                    loginBtn.addEventListener('click', function() {
+                      document.getElementById('side-menu').style.transform = 'translateX(100%)';
+                      document.getElementById('side-menu-backdrop').style.display = 'none';
+                      document.getElementById('home-page').style.display = 'none';
+                      document.getElementById('login-panel').style.display = 'block';
+                    });
+                  }
+                });
+              </script>
+            </div>
+          </div>
+          <div id="side-menu-backdrop" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:2999;"></div>
+          <script>
+            // Side menu open/close logic
+            const menuBtn = document.getElementById('menu-btn');
+            const sideMenu = document.getElementById('side-menu');
+            const closeSideMenu = document.getElementById('close-side-menu');
+            const sideMenuBackdrop = document.getElementById('side-menu-backdrop');
+
+            function openMenu() {
+              sideMenu.style.transform = 'translateX(0)';
+              sideMenuBackdrop.style.display = 'block';
+            }
+            function closeMenu() {
+              sideMenu.style.transform = 'translateX(100%)';
+              sideMenuBackdrop.style.display = 'none';
+            }
+            menuBtn.addEventListener('click', openMenu);
+            closeSideMenu.addEventListener('click', closeMenu);
+            sideMenuBackdrop.addEventListener('click', closeMenu);
+    </script>
+  </div>
+<!-- Search Bar -->
+<div style="background:#f7fbfd;padding:1.1rem 1.2rem 1.1rem 1.2rem;border-bottom:1.5px solid #e0e0e0;display:flex;align-items:center;gap:0.7rem;">
+  <input type="text" placeholder="Search" style="flex:1;padding:0.7rem 1rem;border:2px solid #bfc9d1;border-radius:6px;font-size:1.1rem;background:#fff;outline:none;" />
+  <button style="background:#18706e;color:#fff;border:none;border-radius:6px;padding:0.7rem 1.1rem;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="display:block;" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="7" stroke="white" stroke-width="2"/>
+      <line x1="16" y1="16" x2="20" y2="20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+    <!-- Welcome Section -->
+    <div style="background:#eaf4fa;padding:2.2rem 1.2rem 2.2rem 1.2rem;display:flex;flex-direction:column;align-items:center;">
+      <div style="font-size:2.2rem;font-weight:700;color:#2d3a4a;text-align:center;margin-bottom:1.1rem;">Welcome to the Medicare Mobile App</div>
+      <button id="get-started-btn" class="fade-in" style="background:#18706e;color:#fff;font-size:1.25rem;font-weight:700;padding:1rem 2.5rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);margin-bottom:0.7rem;cursor:pointer;">
+      Get Started
+      </button>
+
+      <!-- Get Started Modal -->
+      <div id="get-started-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fff;z-index:4000;align-items:center;justify-content:center;overflow:auto;">
+      <div id="get-started-modal-content" style="width:100vw;max-width:100vw;height:100vh;max-height:100vh;overflow:auto;position:relative;display:flex;flex-direction:column;">
+        <button id="close-get-started-modal" style="position:absolute;top:1.2rem;right:2rem;background:none;border:none;font-size:2.5rem;cursor:pointer;color:#18706e;z-index:4100;">&times;</button>
+        <div id="get-started-html-container" style="width:100%;height:100%;overflow:auto;"></div>
+      </div>
+      </div>
+      <script>
+      // Get Started modal logic with external HTML loading
+      document.addEventListener('DOMContentLoaded', function() {
+        const getStartedBtn = document.getElementById('get-started-btn');
+        const getStartedModal = document.getElementById('get-started-modal');
+        const closeGetStartedModal = document.getElementById('close-get-started-modal');
+        const getStartedHtmlContainer = document.getElementById('get-started-html-container');
+        let loaded = false;
+
+        if (getStartedBtn && getStartedModal) {
+        getStartedBtn.addEventListener('click', function() {
+          getStartedModal.style.display = 'flex';
+          if (!loaded) {
+          fetch('getstarted.html')
+            .then(res => res.text())
+            .then(html => {
+            getStartedHtmlContainer.innerHTML = html;
+            loaded = true;
+            })
+            .catch(() => {
+            getStartedHtmlContainer.innerHTML = '<div style="padding:2rem;text-align:center;color:#b00020;">Could not load content.</div>';
+            });
+          }
+        });
+        }
+        if (closeGetStartedModal) {
+        closeGetStartedModal.addEventListener('click', function() {
+          getStartedModal.style.display = 'none';
+        });
+        }
+        // Optional: close modal when clicking outside the content
+        if (getStartedModal) {
+        getStartedModal.addEventListener('click', function(e) {
+          if (e.target === getStartedModal) getStartedModal.style.display = 'none';
+        });
+        }
+      });
+      </script>
+    </div>
+    <!-- Main Cards Section -->
+    <div style="display:flex;flex-direction:column;gap:1rem;width:100%;padding:1.5rem 1.2rem 2.2rem 1.2rem;"></div>
+        <div class="fade-in" id="card-login" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
+            <i class="fas fa-user-plus" style="color:#18706e;font-size:1.3rem;"></i> Log in or create an account
+          </div>
+          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Access your information anytime, anywhere</div>
+          <button id="login-create-btn" style="background:#18706e;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Log in/Create Account</button>
+        </div>
+        <div class="fade-in" id="card-plans" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;"> Find health & drug plans</div>
+          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Find & compare plans in your area</div>
+          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Plans Now</button>
+        </div>
+        <div class="fade-in" id="card-providers" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">Find care providers</div>
+          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Compare hospitals, nursing homes, & more</div>
+          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Providers Near Me</button>
+        </div>
+        <div class="fade-in" id="card-help" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;">
+          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">Talk to someone</div>
+          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Contact Medicare & other helpful resources</div>
+          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Get Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="login-panel" id="login-panel" style="display:none;">
+    <div class="login-title" style="display: flex; align-items: center; justify-content: space-between; gap: 0.7rem;">
+      <button type="button" id="back-to-home" style="background:none;border:none;font-size:1.7rem;cursor:pointer;color:#18706e;padding:0 0.5rem 0 0;line-height:1;">
+      &#8592;
+      </button>
+      <script>
+        // Back to home logic for login panel
+        document.addEventListener('DOMContentLoaded', function() {
+          var backToHomeBtn = document.getElementById('back-to-home');
+          if (backToHomeBtn) {
+            backToHomeBtn.onclick = function() {
+              document.getElementById('login-panel').style.display = 'none';
+              document.getElementById('home-page').style.display = 'flex';
+            };
+          }
+        });
+      </script>
+      Log in
+      <img src="Medicare.gov.avif" alt="Medicare.gov" style="height: 92px; margin-left: 0.7rem;" />
+    </div>
+    <form id="login-form" autocomplete="off">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" autocomplete="username" required />
+      </div>
+      <div class="save-username-box">
+        <input type="checkbox" id="save-username" />
+        <div class="save-username-info">
+          Save my username for next time
+          <b>Don't check this box if you're using a shared or public device.</b>
+          <a href="#" tabindex="-1">What's this?</a>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div class="password-row">
+          <input id="password" type="password" autocomplete="current-password" required />
+          <button type="button" class="show-toggle" id="togglePassword">Show</button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn">Log in</button>
+      <button type="button" class="login-btn" id="create-account-btn" style="margin-top:0.5rem;background:#fff;color:#18706e;border:2px solid #18706e;">Create Account</button>
+
+      <div id="error-msg" class="error" style="display:none;"></div>
+      <a class="forgot-link" href="#" id="forgot-link">Forgot your username or password?</a>
+    </form>
+
+    <!-- Forgot Username or Password Popup -->
+    <div id="forgot-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:10px;max-width:420px;width:100%;box-shadow:0 2px 8px rgba(44,62,80,0.18);position:relative;">
+        <button id="close-forgot-popup" style="position:absolute;top:0.7rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#18706e;">&times;</button>
+        <div id="forgot-step1">
+          <div style="font-size:2rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Find your account</div>
+          <div style="font-size:1.35rem;font-weight:600;color:#2d3a4a;margin-bottom:1.1rem;">Confirm your identity</div>
+          <div style="font-size:1.05rem;color:#222;margin-bottom:1.1rem;">
+            To get started, you'll need your red, white, and blue Medicare card.
+          </div>
+          <div style="font-size:1rem;color:#b00020;margin-bottom:1.1rem;">All fields required.</div>
+          <form id="forgot-form">
+            <div class="input-group" style="margin-bottom:1.1rem;">
+              <label for="forgot-medicare-number" style="font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Medicare Number</label>
+              <input id="forgot-medicare-number" type="text" maxlength="11" required style="text-transform:uppercase;" />
+            </div>
+            <div style="display:flex;justify-content:center;margin-bottom:1.2rem;">
+              <img src="MedicareCardPartA.svg" alt="Medicare Card Example" style="max-width:260px;border-radius:7px;box-shadow:0 2px 8px rgba(44,62,80,0.10);border:1.5px solid #e0e0e0;">
+            </div>
+            <div style="margin-bottom:1.1rem;">
+              <a href="#" id="other-ways-link" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">
+                Other ways to get your Medicare Number <span style="font-size:1.1em;">&#9432;</span>
+              </a>
+
+              <!-- Other Ways Popup -->
+              <div id="other-ways-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:1100;align-items:center;justify-content:center;">
+                <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:10px;max-width:420px;width:100%;box-shadow:0 2px 8px rgba(44,62,80,0.18);position:relative;">
+                  <button id="close-other-ways-popup" style="position:absolute;top:0.7rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:#18706e;">Close</button>
+                  <div style="font-size:1.45rem;font-weight:700;color:#2d3a4a;margin-bottom:1.1rem;">
+                    Other ways to get your Medicare Number
+                  </div>
+                  <div style="margin-bottom:1.2rem;">
+                    <div style="font-size:1.13rem;font-weight:700;margin-bottom:0.4rem;">If you don't have your Medicare card</div>
+                    <div style="font-size:1rem;color:#222;margin-bottom:0.5rem;">
+                      If you don't have your Medicare card, you can get your Medicare Number by logging in to your <i>my</i> Social Security account.
+                    </div>
+                    <a href="https://www.ssa.gov/myaccount/" target="_blank" rel="noopener" style="color:#1a5a96;text-decoration:underline;font-size:1rem;display:block;margin-bottom:1.2rem;">Log in to <i>my</i> Social Security Account</a>
+                    <div style="font-size:1.13rem;font-weight:700;margin-bottom:0.4rem;">If your Medicare card is lost or damaged</div>
+                    <div style="font-size:1rem;color:#222;margin-bottom:0.5rem;">
+                      Call 1-800-MEDICARE (<a href="tel:1-800-633-4227" style="color:#1a5a96;text-decoration:underline;">1-800-633-4227</a>) to order a replacement card to be sent in the mail. TTY users can call <a href="tel:1-877-486-2048" style="color:#1a5a96;text-decoration:underline;">1-877-486-2048</a>.
+                    </div>
+                    <div style="font-size:1rem;color:#222;margin-bottom:0.5rem;">
+                      If you get Railroad Retirement Board (RRB) benefits, you can call <a href="tel:1-877-772-5772" style="color:#1a5a96;text-decoration:underline;">1-877-772-5772</a> to get a replacement card. TTY users can call <a href="tel:1-312-751-4701" style="color:#1a5a96;text-decoration:underline;">1-312-751-4701</a>.
+                    </div>
+                    <a href="https://www.medicare.gov/basics/get-started-with-medicare/using-medicare/your-medicare-card" target="_blank" rel="noopener" style="color:#1a5a96;text-decoration:underline;font-size:1rem;display:block;margin-top:1.2rem;">Get more information about your Medicare card.</a>
+                  </div>
+                </div>
+              </div>
+              <script>
+  // Fade-in transitions for home page elements
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => document.getElementById('medicare-logo').classList.add('visible'), 100);
+    setTimeout(() => document.getElementById('main-hero-img').classList.add('visible'), 300);
+    setTimeout(() => document.getElementById('welcome-title').classList.add('visible'), 500);
+    setTimeout(() => document.getElementById('get-started-btn').classList.add('visible'), 700);
+    setTimeout(() => document.getElementById('card-login').classList.add('visible'), 900);
+    setTimeout(() => document.getElementById('card-plans').classList.add('visible'), 1050);
+    setTimeout(() => document.getElementById('card-providers').classList.add('visible'), 1200);
+    setTimeout(() => document.getElementById('card-help').classList.add('visible'), 1350);
+  });
+  // Home page logic
+  const homePage = document.getElementById('home-page');
+  const loginPanel = document.getElementById('login-panel');
+
+  const loginCreateBtn = document.getElementById('login-create-btn');
+  loginCreateBtn.addEventListener('click', function() {
+    homePage.style.display = 'none';
+    loginPanel.style.display = 'block';
+  });
+
+  // Login logic
+  const loginForm = document.getElementById('login-form');
+  const errorMsg = document.getElementById('error-msg');
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    if (username === 'John1' && password === '12345') {
+      errorMsg.style.display = 'none';
+      loginPanel.style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    } else {
+      errorMsg.textContent = 'Invalid username or password.';
+      errorMsg.style.display = 'block';
+    }
+  });
+                // Other ways popup logic
+                document.addEventListener('DOMContentLoaded', function() {
+                  const otherWaysLink = document.getElementById('other-ways-link');
+                  const otherWaysPopup = document.getElementById('other-ways-popup');
+                  const closeOtherWaysPopup = document.getElementById('close-other-ways-popup');
+                  if (otherWaysLink && otherWaysPopup && closeOtherWaysPopup) {
+                    otherWaysLink.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      otherWaysPopup.style.display = 'flex';
+                    });
+                    closeOtherWaysPopup.addEventListener('click', function() {
+                      otherWaysPopup.style.display = 'none';
+                    });
+                    otherWaysPopup.addEventListener('click', function(e) {
+                      if (e.target === otherWaysPopup) otherWaysPopup.style.display = 'none';
+                    });
+                  }
+                });
+              </script></div>
+            </div>
+            <div style="display:flex;gap:0.7rem;margin-bottom:1.1rem;">
+              <div style="flex:2;">
+                <label for="forgot-last-name" style="font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Last Name</label>
+                <input id="forgot-last-name" type="text" required />
+              </div>
+              <div style="flex:1;">
+                <label for="forgot-suffix" style="font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Suffix</label>
+                <select id="forgot-suffix" style="width:100%;padding:0.9rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;">
+                  <option value="">None</option>
+                  <option value="Jr">Jr</option>
+                  <option value="Sr">Sr</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group" style="margin-bottom:1.1rem;">
+              <label for="forgot-dob" style="font-size:1rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Date of Birth</label>
+              <input id="forgot-dob" type="text" placeholder="MM/DD/YYYY" maxlength="10" required />
+            </div>
+            <div style="display:flex;gap:0.7rem;">
+              <button type="button" class="login-btn" id="forgot-cancel-btn" style="background:#fff;color:#18706e;border:2px solid #18706e;">Cancel</button>
+              <button type="submit" class="login-btn">Next</button>
+            </div>
+          </form>
+        </div>
+        <div id="forgot-step2" style="display:none;">
+          <div style="font-size:1.15rem;font-weight:600;color:#18706e;margin-bottom:0.7rem;">Check your email</div>
+          <div style="font-size:1rem;color:#222;margin-bottom:1.2rem;">
+            If you don't see it, check your spam folder or try again in 5 minutes.
+          </div>
+          <button type="button" class="login-btn" id="forgot-done-btn" style="background:#fff;color:#18706e;border:2px solid #18706e;">Done</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Forgot password popup logic
+      const forgotLink = document.getElementById('forgot-link');
+      const forgotPopup = document.getElementById('forgot-popup');
+      const closeForgotPopup = document.getElementById('close-forgot-popup');
+      const forgotForm = document.getElementById('forgot-form');
+      const forgotStep1 = document.getElementById('forgot-step1');
+      const forgotStep2 = document.getElementById('forgot-step2');
+      const forgotCancelBtn = document.getElementById('forgot-cancel-btn');
+      const forgotDoneBtn = document.getElementById('forgot-done-btn');
+
+      forgotLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        forgotPopup.style.display = 'flex';
+        forgotStep1.style.display = 'block';
+        forgotStep2.style.display = 'none';
+        forgotForm.reset();
+      });
+
+      closeForgotPopup.addEventListener('click', function() {
+        forgotPopup.style.display = 'none';
+      });
+
+      forgotCancelBtn.addEventListener('click', function() {
+        forgotPopup.style.display = 'none';
+      });
+
+      forgotForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // You can add validation here if needed
+        forgotStep1.style.display = 'none';
+        forgotStep2.style.display = 'block';
+      });
+
+      forgotDoneBtn.addEventListener('click', function() {
+        forgotPopup.style.display = 'none';
+      });
+
+      // Optional: close popup when clicking outside the box
+      forgotPopup.addEventListener('click', function(e) {
+        if (e.target === forgotPopup) forgotPopup.style.display = 'none';
+      });
+    </script>
+  </div>
+  <div id="dashboard" style="display:none;">
+    <div style="background:#fff;max-width:420px;margin:0 auto;border-radius:10px;box-shadow:0 2px 8px rgba(44,62,80,0.08);border:1.5px solid #e0e0e0;overflow:hidden;">
+      <button type="button" id="back-to-login-dashboard" style="background:none;border:none;font-size:1.7rem;cursor:pointer;color:#18706e;padding:0 0.5rem 0 0;line-height:1;margin-top:1rem;margin-left:0.5rem;">&#x2190;</button>
+      <script>
+        // Dashboard back arrow logic
+        document.addEventListener('DOMContentLoaded', function() {
+          var backBtn = document.getElementById('back-to-login-dashboard');
+          if (backBtn) {
+        backBtn.onclick = function() {
+          document.getElementById('dashboard').style.display = 'none';
+          document.getElementById('login-panel').style.display = 'block';
+        };
+          }
+        });
+      </script>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.2rem 0.7rem 1.2rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <img src='Medicare.gov.avif' alt='Medicare.gov' style='height:88px;'/>
+          <span style="font-size:1.35rem;font-weight:700;color:#18706e;letter-spacing:-1px;"></span>
+        </div>
+        <button id="dashboard-menu-btn" style="background:#fff;border:2px solid #18706e;border-radius:7px;padding:0.4rem 1.1rem;font-size:1.1rem;font-weight:600;color:#18706e;cursor:pointer;display:flex;align-items:center;gap:0.5rem;">
+          <span style="font-size:1.2rem;">&#9776;</span> Menu
+        </button>
+        <!-- Side Menu Popup for Dashboard -->
+        <div id="dashboard-side-menu" style="position:fixed;top:0;right:0;height:100vh;width:340px;max-width:95vw;background:#fff;box-shadow:-2px 0 16px rgba(44,62,80,0.13);z-index:3000;transform:translateX(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:1.3rem 1.2rem 1.1rem 1.2rem;border-bottom:1.5px solid #e0e0e0;">
+            <span style="font-size:2rem;font-weight:700;color:#2d3a4a;">Menu</span>
+            <button id="dashboard-close-side-menu" style="background:none;border:none;font-size:2rem;cursor:pointer;color:#222;">&times;</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.2rem;padding:0.7rem 0;">
+            <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+              Basics <span style="font-size:1.2rem;">&#8250;</span>
+            </button>
+            <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+              Health &amp; Drug Plans <span style="font-size:1.2rem;">&#8250;</span>
+            </button>
+            <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+              Providers &amp; Services <span style="font-size:1.2rem;">&#8250;</span>
+            </button>
+            <button style="background:none;border:none;text-align:left;padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;">
+              <span>
+          <img class="ch-u-margin-right--8px" src="https://frontend.medicare.gov/assets/Icon_Chat-f1ad62dd.svg" alt="" style="height:1.2em;width:auto;vertical-align:middle;margin-right:0.5rem;">
+          Chat
+              </span>
+              <span style="font-size:1.2rem;">&#8250;</span>
+            </button>
+            <div style="padding:1.1rem 1.2rem;font-size:1.13rem;color:#18706e;font-weight:600;cursor:pointer;">
+              Cambiar a español
+            </div>
+            <div style="padding:1.1rem 1.2rem;">
+              <button id="dashboard-logout-btn" style="width:100%;background:#18706e;color:#fff;border:none;border-radius:6px;padding:0.9rem 0;font-size:1.13rem;font-weight:700;cursor:pointer;">Log out</button>
+            </div>
+            <script>
+              // Log out button logic: return to login page
+              document.addEventListener('DOMContentLoaded', function() {
+              const logoutBtn = document.getElementById('dashboard-logout-btn');
+              if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                document.getElementById('dashboard').style.display = 'none';
+                document.getElementById('login-panel').style.display = 'block';
+                });
+              }
+              });
+            </script>
+          </div>
+        </div>
+        <div id="dashboard-side-menu-backdrop" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:2999;"></div>
+        <script>
+          // Dashboard side menu open/close logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('dashboard-menu-btn');
+            const sideMenu = document.getElementById('dashboard-side-menu');
+            const closeSideMenu = document.getElementById('dashboard-close-side-menu');
+            const sideMenuBackdrop = document.getElementById('dashboard-side-menu-backdrop');
+            if (menuBtn && sideMenu && closeSideMenu && sideMenuBackdrop) {
+              menuBtn.addEventListener('click', function() {
+          sideMenu.style.transform = 'translateX(0)';
+          sideMenuBackdrop.style.display = 'block';
+              });
+              closeSideMenu.addEventListener('click', function() {
+          sideMenu.style.transform = 'translateX(100%)';
+          sideMenuBackdrop.style.display = 'none';
+              });
+              sideMenuBackdrop.addEventListener('click', function() {
+          sideMenu.style.transform = 'translateX(100%)';
+          sideMenuBackdrop.style.display = 'none';
+              });
+            }
+          });
+        </script>
+        </button>
+      </div>
+      <div style="padding:0 1.2rem 0.7rem 1.2rem;">
+        <div style="font-size:2rem;font-weight:700;color:#2d3a4a;margin-top:0.7rem;">Welcome, John!</div>
+        <div style="font-size:1.25rem;font-weight:700;color:#2d3a4a;margin:1.2rem 0 0.7rem 0;">What do you want to do?</div>
+      </div>
+      <div style="background:#e9f1fb;padding:1.2rem 1.2rem 1.5rem 1.2rem;">
+        <div style="background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1rem 1rem 1rem 1.5rem;display:flex;align-items:flex-start;gap:0.7rem;border-left:6px solid #1a5a96;margin-bottom:1.2rem;">
+          <span style="font-size:1.3rem;color:#1a5a96;margin-top:2px;">&#9432;</span>
+          <span style="font-size:1.05rem;color:#222;">
+            Medicare's Open Enrollment Period runs from October 15 to December 7. This is your opportunity to <a href="#" style="color:#1a5a96;text-decoration:underline;">review and change</a> your Medicare health and prescription drug coverage for 2026.
+          </span>
+        </div>
+        <button style="width:100%;background:#fff;border:2px solid #e0e0e0;border-radius:8px;padding:1.1rem 1rem;font-size:1.13rem;color:#18706e;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;cursor:pointer;box-shadow:0 1px 4px rgba(24,112,110,0.04);">
+          <i class="fas fa-bag-shopping" style="color:#18706e;font-size:1.3rem;margin-right:0.5rem;"></i> Find health &amp; drug plans
+        </button>
+        <button style="width:100%;background:#fff;border:2px solid #e0e0e0;border-radius:8px;padding:1.1rem 1rem;font-size:1.13rem;color:#18706e;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;cursor:pointer;box-shadow:0 1px 4px rgba(24,112,110,0.04);">
+          <i class="fas fa-credit-card" style="color:#18706e;font-size:1.3rem;margin-right:0.5rem;"></i> Check my claims
+        </button>
+        <button style="width:100%;background:#fff;border:2px solid #e0e0e0;border-radius:8px;padding:1.1rem 1rem;font-size:1.13rem;color:#18706e;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;cursor:pointer;box-shadow:0 1px 4px rgba(24,112,110,0.04);">
+            <i class="fas fa-dollar-sign" style="color:#18706e;font-size:1.3rem;margin-right:0.5rem;"></i>
+          </i> Pay my premium
+        </button>
+        <button style="width:100%;background:#fff;border:2px solid #e0e0e0;border-radius:8px;padding:1.1rem 1rem;font-size:1.13rem;color:#18706e;font-weight:700;margin-bottom:0;display:flex;align-items:center;gap:0.7rem;cursor:pointer;box-shadow:0 1px 4px rgba(24,112,110,0.04);">
+          <span style="font-size:1.3rem;color:#18706e;">&#9776;</span> Open all options
+        </button>
+      </div>
+  </div>
+</div>
+<div class="create-account-panel" id="create-account-panel" style="display:none;">
+  <div class="login-title" style="font-size:2rem;display:flex;align-items:center;gap:0.7rem;">
+    <button type="button" id="back-to-login" style="background:none;border:none;font-size:1.7rem;cursor:pointer;color:#18706e;padding:0 0.5rem 0 0;line-height:1;">
+      &#8592;
+    </button>
+    Create an account
+  </div>
+  <div class="create-account-content">
+    <div style="font-size:1rem;color:#222;margin-bottom:0.7rem;">
+      <b>Step 1 of 3</b>
+    </div>
+    <div style="font-size:1.35rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">
+      Enter your Medicare information
+    </div>
+    <div style="font-size:1.05rem;color:#222;margin-bottom:1.1rem;">
+      To get started, you'll need your red, white, and blue Medicare card.<br>
+      <a href="#" id="no-medicare-card-link" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">
+        I don't have a Medicare card <span style="font-size:1.1em;">&#9432;</span>
+      </a>
+      <!-- No Medicare Card Popup -->
+      <div id="no-medicare-card-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:2000;align-items:center;justify-content:center;">
+        <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:10px;max-width:420px;width:100%;box-shadow:0 2px 8px rgba(44,62,80,0.18);position:relative;">
+          <button id="close-no-medicare-card-popup" style="position:absolute;top:0.7rem;right:1rem;background:none;border:1px solid #bfc9d1;border-radius:5px;font-size:1rem;cursor:pointer;color:#2d3a4a;padding:0.2rem 0.8rem;">Close</button>
+          <div style="font-size:1.6rem;font-weight:700;color:#2d3a4a;margin-bottom:1.1rem;">
+            I don't have a Medicare card
+          </div>
+          <div style="font-size:1rem;color:#222;margin-bottom:1.2rem;">
+            If you don't have your Medicare card, you can get your Medicare Number by
+            <a href="https://www.ssa.gov/myaccount/" target="_blank" rel="noopener" style="color:#1a5a96;text-decoration:underline;">logging in to your Social Security account.</a>
+          </div>
+          <div style="font-size:1rem;color:#222;">
+            If you need more help, you can call 1-800-MEDICARE
+            (<a href="tel:1-800-633-4227" style="color:#1a5a96;text-decoration:underline;">1-800-633-4227</a>).
+            TTY users can call
+            <a href="tel:1-877-486-2048" style="color:#1a5a96;text-decoration:underline;">1-877-486-2048</a>.
+          </div>
+        </div>
+      </div>
+      <script>
+        // No Medicare Card popup logic
+        document.addEventListener('DOMContentLoaded', function() {
+          const noMedicareCardLink = document.getElementById('no-medicare-card-link');
+          const noMedicareCardPopup = document.getElementById('no-medicare-card-popup');
+          const closeNoMedicareCardPopup = document.getElementById('close-no-medicare-card-popup');
+          if (noMedicareCardLink && noMedicareCardPopup && closeNoMedicareCardPopup) {
+            noMedicareCardLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              noMedicareCardPopup.style.display = 'flex';
+            });
+            closeNoMedicareCardPopup.addEventListener('click', function() {
+              noMedicareCardPopup.style.display = 'none';
+            });
+            noMedicareCardPopup.addEventListener('click', function(e) {
+              if (e.target === noMedicareCardPopup) noMedicareCardPopup.style.display = 'none';
+            });
+          }
+        });
+      </script></div>
+    </div>
+    <div style="font-size:1.1rem;font-weight:600;color:#2d3a4a;margin-bottom:0.7rem;">
+      Enter your Medicare Number and coverage start date
+    </div>
+    <div style="display:flex;justify-content:center;margin-bottom:1.2rem;">
+      <img src="MedicareCardPartA.svg" alt="Medicare Card Example" style="max-width:260px;border-radius:7px;box-shadow:0 2px 8px rgba(44,62,80,0.10);border:1.5px solid #e0e0e0;">
+    </div>
+    <form id="create-account-form" autocomplete="off">
+      <div class="input-group">
+        <label for="medicare-number">Medicare Number</label>
+        <input id="medicare-number" type="text" required maxlength="11" style="text-transform:uppercase;" />
+        <div id="medicare-number-error" style="color:#b00020;font-size:0.98rem;margin-top:0.2rem;display:none;">
+          <span style="font-size:1.1em;">&#9888;</span> Enter your Medicare Number.
+        </div>
+      </div>
+      <div style="font-size:1.02rem;font-weight:600;margin-bottom:0.3rem;">Part A Coverage Start Date</div>
+      <div style="font-size:0.98rem;color:#444;margin-bottom:0.5rem;">Use the format MM/YYYY</div>
+      <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;">
+        <div>
+          <label for="parta-month" style="font-size:0.98rem;font-weight:600;">Month</label>
+          <input id="parta-month" type="text" maxlength="2" pattern="\d{2}" required style="width:60px;text-align:center;" />
+        </div>
+        <span style="font-size:1.3rem;">/</span>
+        <div>
+          <label for="parta-year" style="font-size:0.98rem;font-weight:600;">Year</label>
+          <input id="parta-year" type="text" maxlength="4" pattern="\d{4}" required style="width:80px;text-align:center;" />
+        </div>
+      </div>
+      <div style="margin-bottom:1.1rem;">
+        <b style="font-size:1.01rem;">Don't have Part A?</b><br>
+        <!-- Coverage Options Link -->
+        <a href="#" id="get-other-options-link" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">Get other options</a>
+
+        <!-- Coverage Options Popup -->
+        <div id="coverage-options-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(44,62,80,0.18);z-index:2100;align-items:center;justify-content:center;">
+          <div style="background:#fff;padding:2.5rem 2rem 2rem 2rem;border-radius:10px;max-width:480px;width:100%;box-shadow:0 2px 8px rgba(44,62,80,0.18);position:relative;">
+            <button id="close-coverage-options-popup" style="position:absolute;top:0.7rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#18706e;">&times;</button>
+            <div id="coverage-step1">
+              <div style="font-size:2rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Create an account</div>
+              <div style="font-size:1rem;color:#222;margin-bottom:1.1rem;"><b>Step 1 of 3</b></div>
+              <div style="font-size:1.35rem;font-weight:700;color:#2d3a4a;margin-bottom:1.1rem;">Enter your Medicare information</div>
+              <div style="font-size:1.05rem;color:#222;margin-bottom:1.1rem;">
+                To get started, you'll need your red, white, and blue Medicare card.
+              </div>
+              <a href="#" style="color:#1a5a96;text-decoration:underline;font-size:1rem;display:inline-block;margin-bottom:1.1rem;">I don't have a Medicare card <span style="font-size:1.1em;">&#9432;</span></a>
+              <div style="font-size:1.25rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Select the type of coverage you have</div>
+              <form id="coverage-type-form">
+                <div style="margin-bottom:0.7rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" name="coverage-type" value="partb" required />
+                    Part B (Medical Insurance)
+                    </label>
+                    <div id="partb-fields" style="display:none; margin-top:0.7rem; margin-left:2rem;">
+                    <div class="input-group">
+                      <label for="medicare-number-b-popup">Medicare Number</label>
+                      <input id="medicare-number-b-popup" type="text" maxlength="11" style="text-transform:uppercase;" />
+                    </div>
+                    <div style="font-size:1.02rem;font-weight:600;margin-bottom:0.3rem;">Part B Coverage Start Date</div>
+                    <div style="font-size:0.98rem;color:#444;margin-bottom:0.5rem;">Use the format MM/YYYY</div>
+                    <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;">
+                      <div>
+                      <label for="partb-month-popup" style="font-size:0.98rem;font-weight:600;">Month</label>
+                      <input id="partb-month-popup" type="text" maxlength="2" style="width:60px;text-align:center;" />
+                      </div>
+                      <span style="font-size:1.3rem;">/</span>
+                      <div>
+                      <label for="partb-year-popup" style="font-size:0.98rem;font-weight:600;">Year</label>
+                      <input id="partb-year-popup" type="text" maxlength="4" style="width:80px;text-align:center;" />
+                      </div>
+                    </div>
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom:1.1rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" name="coverage-type" value="immuno" />
+                    Immunosuppressive drug coverage only
+                  </label>
+                </div>
+                <div style="font-weight:700;margin-bottom:0.3rem;">Don't have Part B or Immunosuppressive drug coverage?</div>
+                <a href="#" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">Switch to Part A</a>
+              </form>
+            </div>
+            <div id="coverage-step2" style="display:none;">
+              <div style="font-size:2rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Create an account</div>
+              <div style="font-size:1rem;color:#222;margin-bottom:1.1rem;"><b>Step 1 of 3</b></div>
+              <div style="font-size:1.35rem;font-weight:700;color:#2d3a4a;margin-bottom:1.1rem;">Enter your Medicare information</div>
+              <div style="font-size:1.25rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Select the type of coverage you have</div>
+              <form>
+                <div style="margin-bottom:0.7rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" checked disabled />
+                    Part B (Medical Insurance)
+                  </label>
+                </div>
+                <div style="margin-bottom:1.1rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" disabled />
+                    Immunosuppressive drug coverage only
+                  </label>
+                </div>
+              </form>
+              <div style="font-size:1.18rem;font-weight:600;color:#2d3a4a;margin-bottom:0.7rem;">Enter your Medicare Number and coverage start date</div>
+              <div style="display:flex;justify-content:center;margin-bottom:1.2rem;">
+                <img src="MedicareCardPartB.png" alt="Medicare Card Example" style="max-width:260px;border-radius:7px;box-shadow:0 2px 8px rgba(44,62,80,0.10);border:1.5px solid #e0e0e0;">
+              </div>
+              <div class="input-group">
+                <label for="medicare-number-b">Medicare Number</label>
+                <input id="medicare-number-b" type="text" maxlength="11" style="text-transform:uppercase;" />
+              </div>
+              <div style="font-size:1.02rem;font-weight:600;margin-bottom:0.3rem;">Part B Coverage Start Date</div>
+              <div style="font-size:0.98rem;color:#444;margin-bottom:0.5rem;">Use the format MM/YYYY</div>
+              <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;">
+                <div>
+                  <label for="partb-month" style="font-size:0.98rem;font-weight:600;">Month</label>
+                  <input id="partb-month" type="text" maxlength="2" style="width:60px;text-align:center;" />
+                </div>
+                <span style="font-size:1.3rem;">/</span>
+                <div>
+                  <label for="partb-year" style="font-size:0.98rem;font-weight:600;">Year</label>
+                  <input id="partb-year" type="text" maxlength="4" style="width:80px;text-align:center;" />
+                </div>
+              </div>
+            </div>
+            <div id="coverage-step3" style="display:none;">
+              <div style="font-size:2rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Create an account</div>
+              <div style="font-size:1rem;color:#222;margin-bottom:1.1rem;"><b>Step 1 of 3</b></div>
+              <div style="font-size:1.35rem;font-weight:700;color:#2d3a4a;margin-bottom:1.1rem;">Enter your Medicare information</div>
+              <div style="font-size:1.25rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Select the type of coverage you have</div>
+              <form>
+                <div style="margin-bottom:0.7rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" disabled />
+                    Part B (Medical Insurance)
+                  </label>
+                </div>
+                <div style="margin-bottom:1.1rem;">
+                  <label style="display:flex;align-items:center;gap:0.5rem;font-size:1.08rem;">
+                    <input type="radio" checked disabled />
+                    Immunosuppressive drug coverage only
+                  </label>
+                </div>
+              </form>
+              <div style="font-size:1.18rem;font-weight:600;color:#2d3a4a;margin-bottom:0.7rem;">Enter your Medicare Number and coverage start date</div>
+              <div style="display:flex;justify-content:center;margin-bottom:1.2rem;">
+                <img src="MedicareCardImmuno.png" alt="Medicare Card Example" style="max-width:260px;border-radius:7px;box-shadow:0 2px 8px rgba(44,62,80,0.10);border:1.5px solid #e0e0e0;">
+              </div>
+              <div class="input-group">
+                <label for="medicare-number-immuno">Medicare Number</label>
+                <input id="medicare-number-immuno" type="text" maxlength="11" style="text-transform:uppercase;" />
+              </div>
+              <div style="font-size:1.02rem;font-weight:600;margin-bottom:0.3rem;">Immunosuppressive Coverage Start Date</div>
+              <div style="font-size:0.98rem;color:#444;margin-bottom:0.5rem;">Use the format MM/YYYY</div>
+              <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.1rem;">
+                <div>
+                  <label for="immuno-month" style="font-size:0.98rem;font-weight:600;">Month</label>
+                  <input id="immuno-month" type="text" maxlength="2" style="width:60px;text-align:center;" />
+                </div>
+                <span style="font-size:1.3rem;">/</span>
+                <div>
+                  <label for="immuno-year" style="font-size:0.98rem;font-weight:600;">Year</label>
+                  <input id="immuno-year" type="text" maxlength="4" style="width:80px;text-align:center;" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Coverage Options Popup Logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const getOtherOptionsLink = document.getElementById('get-other-options-link');
+            const coverageOptionsPopup = document.getElementById('coverage-options-popup');
+            const closeCoverageOptionsPopup = document.getElementById('close-coverage-options-popup');
+            const coverageStep1 = document.getElementById('coverage-step1');
+            const coverageStep2 = document.getElementById('coverage-step2');
+            const coverageStep3 = document.getElementById('coverage-step3');
+            const coverageTypeForm = document.getElementById('coverage-type-form');
+
+            if (getOtherOptionsLink && coverageOptionsPopup && closeCoverageOptionsPopup) {
+              getOtherOptionsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                coverageOptionsPopup.style.display = 'flex';
+                coverageStep1.style.display = 'block';
+                coverageStep2.style.display = 'none';
+                coverageStep3.style.display = 'none';
+                // Reset radio buttons
+                if (coverageTypeForm) coverageTypeForm.reset();
+              });
+              closeCoverageOptionsPopup.addEventListener('click', function() {
+                coverageOptionsPopup.style.display = 'none';
+              });
+              coverageOptionsPopup.addEventListener('click', function(e) {
+                if (e.target === coverageOptionsPopup) coverageOptionsPopup.style.display = 'none';
+              });
+            }
+
+            // Handle radio selection to show next step
+            if (coverageTypeForm) {
+              coverageTypeForm.addEventListener('change', function(e) {
+                if (e.target.name === 'coverage-type') {
+                  if (e.target.value === 'partb') {
+                    coverageStep1.style.display = 'none';
+                    coverageStep2.style.display = 'block';
+                    coverageStep3.style.display = 'none';
+                  } else if (e.target.value === 'immuno') {
+                    coverageStep1.style.display = 'none';
+                    coverageStep2.style.display = 'none';
+                    coverageStep3.style.display = 'block';
+                  }
+                }
+              });
+            }
+          });
+        </script>
+      </div>
+      <div style="font-size:0.93rem;color:#444;margin-bottom:1.1rem;">
+        By giving us your personal information, you understand and agree with the Medicare.gov
+        <a href="#" id="privacy-act-link" style="color:#1a5a96;text-decoration:underline;">Privacy Act Statement.</a>
+        <span id="privacy-act-chevron" style="font-size:1.1em;cursor:pointer;">&#x25B2;</span>
+        <div id="privacy-act-details" style="display:none;margin-top:1rem;background:#f8f8f8;border-radius:7px;padding:1.1rem 1rem 1rem 1rem;border:1px solid #e0e0e0;">
+          <div style="font-weight:600;font-size:1.08rem;margin-bottom:0.7rem;">Why's my personal information needed?</div>
+          <div style="margin-bottom:1.1rem;">
+            We use your personal information to set up your secure account on Medicare.gov and give you personalized Medicare information. By creating your account you're agreeing to our privacy policy.
+          </div>
+          <div style="font-weight:600;font-size:1.08rem;margin-bottom:0.7rem;">How's my personal information used?</div>
+          <div style="margin-bottom:1.1rem;">
+            1851(d) of the Social Security Act (42 U.S.C. 1395w-21(d)) lets us give you information and coverage options on Medicare.gov. Certain laws also allow us to use or release your information. Details about the use of your information are in the
+            <a href="https://www.federalregister.gov/documents/2008/02/26/E8-3564/privacy-act-of-1974-report-of-a-modified-or-altered-system-of-records" target="_blank" style="color:#1a5a96;text-decoration:underline;">
+              System of Records Notice "1-800 Medicare Choice (HELPLINE)," System No. 09-70-0535.
+            </a>
+          </div>
+          <a href="#" id="privacy-act-read-less" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">Read less –</a>
+        </div>
+        <script>
+          // Privacy Act Statement expand/collapse logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const link = document.getElementById('privacy-act-link');
+            const chevron = document.getElementById('privacy-act-chevron');
+            const details = document.getElementById('privacy-act-details');
+            const readLess = document.getElementById('privacy-act-read-less');
+            let expanded = false;
+
+            function showDetails() {
+              details.style.display = 'block';
+              chevron.innerHTML = '&#x25BC;';
+              expanded = true;
+            }
+            function hideDetails() {
+              details.style.display = 'none';
+              chevron.innerHTML = '&#x25B2;';
+              expanded = false;
+            }
+
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              if (!expanded) {
+          showDetails();
+              } else {
+          hideDetails();
+              }
+            });
+            chevron.addEventListener('click', function() {
+              if (!expanded) {
+          showDetails();
+              } else {
+          hideDetails();
+              }
+            });
+            readLess.addEventListener('click', function(e) {
+              e.preventDefault();
+              hideDetails();
+            });
+          });
+        </script>
+      </div>
+      <div style="display:flex;gap:0.7rem;">
+        <button type="button" class="login-btn" id="cancel-create-account" style="background:#fff;color:#18706e;border:2px solid #18706e;">Cancel</button>
+        <button type="submit" class="login-btn">Next</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  // Back to login
+  document.getElementById('back-to-login').onclick = function() {
+    document.getElementById('create-account-panel').style.display = 'none';
+    document.getElementById('login-panel').style.display = 'block';
+  };
+  // Cancel button
+  document.getElementById('cancel-create-account').onclick = function() {
+    document.getElementById('create-account-panel').style.display = 'none';
+    document.getElementById('login-panel').style.display = 'block';
+  };
+  // Medicare number validation
+  document.getElementById('create-account-form').addEventListener('submit', function(e) {
+    var medicareNumber = document.getElementById('medicare-number').value.trim();
+    var month = document.getElementById('parta-month').value.trim();
+    var year = document.getElementById('parta-year').value.trim();
+    var error = false;
+    if (!medicareNumber) {
+      document.getElementById('medicare-number-error').style.display = 'block';
+      error = true;
+    } else {
+      document.getElementById('medicare-number-error').style.display = 'none';
+    }
+    if (!month.match(/^\d{2}$/) || !year.match(/^\d{4}$/)) {
+      alert('Please enter a valid Part A start date in MM/YYYY format.');
+      error = true;
+    }
+    if (error) e.preventDefault();
+  });
+</script>
+<script>
+  // Back arrow logic
+  document.getElementById('back-to-login').onclick = function() {
+    document.getElementById('create-account-panel').style.display = 'none';
+    document.getElementById('login-panel').style.display = 'block';
+  };
+</script>
+</div>
+  <script>
+     // Show/hide password toggle
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+    togglePassword.addEventListener('click', function() {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePassword.textContent = 'Hide';
+      } else {
+        passwordInput.type = 'password';
+        togglePassword.textContent = 'Show';
+      }
+    });
+
+    // Login logic
+    // const loginForm = document.getElementById('login-form'); // Already declared above
+    // const errorMsg = document.getElementById('error-msg');   // Already declared above
+    // const loginPanel = document.getElementById('login-panel'); // Already declared above
+    const dashboard = document.getElementById('dashboard');
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      if (username === 'John1' && password === '12345') {
+        errorMsg.style.display = 'none';
+        loginPanel.style.display = 'none';
+        dashboard.style.display = 'block';
+      } else {
+        errorMsg.textContent = 'Invalid username or password.';
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
+<!-- Code injected by live-server -->
+<script>
+  // <![CDATA[  <-- For SVG support
+  if ('WebSocket' in window) {
+    (function () {
+      function refreshCSS() {
+        var sheets = [].slice.call(document.getElementsByTagName("link"));
+        var head = document.getElementsByTagName("head")[0];
+        for (var i = 0; i < sheets.length; ++i) {
+          var elem = sheets[i];
+          var parent = elem.parentElement || head;
+          parent.removeChild(elem);
+          var rel = elem.rel;
+          if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+          }
+          parent.appendChild(elem);
+        }
+      }
+      var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+      var address = protocol + window.location.host + window.location.pathname + '/ws';
+      var socket = new WebSocket(address);
+      socket.onmessage = function (msg) {
+        if (msg.data == 'reload') window.location.reload();
+        else if (msg.data == 'refreshcss') refreshCSS();
+      };
+      if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+        console.log('Live reload enabled.');
+        sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+      }
+    })();
+  }
+  else {
+    console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+  }
+  // ]]>
+
+// Create Account logic
+const createAccountPanel = document.getElementById('create-account-panel');
+const createAccountForm = document.getElementById('create-account-form');
+const createAccountButton = document.querySelector('.login-btn:nth-of-type(2)'); // Ensure this targets the correct button
+
+// Wrap create-account-panel contents in a container like login-panel
+if (createAccountPanel && !createAccountPanel.classList.contains('login-panel')) {
+  createAccountPanel.classList.add('login-panel');
+  createAccountPanel.style.maxWidth = '420px';
+  createAccountPanel.style.margin = '0 auto';
+  createAccountPanel.style.borderRadius = '10px';
+  createAccountPanel.style.boxShadow = '0 2px 8px rgba(44,62,80,0.08)';
+  createAccountPanel.style.border = '1.5px solid #e0e0e0';
+  createAccountPanel.style.background = '#fff';
+  createAccountPanel.style.padding = '2.5rem 2rem 2rem 2rem';
+  createAccountPanel.style.display = 'none';
+  createAccountPanel.style.flexDirection = 'column';
+  createAccountPanel.style.gap = '1.2rem';
+}
+
+createAccountButton.addEventListener('click', function() {
+  loginPanel.style.display = 'none';
+  createAccountPanel.style.display = 'flex';
+});
+
+createAccountForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const newUsername = document.getElementById('new-username').value.trim();
+  const newPassword = document.getElementById('new-password').value;
+  const firstName = document.getElementById('first-name').value.trim();
+  const lastName = document.getElementById('last-name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phoneNumber = document.getElementById('phone-number').value.trim();
+  const address = document.getElementById('address').value.trim();
+
+  // Implement your logic to save these details
+  console.log('Account Created:', { newUsername, newPassword, firstName, lastName, email, phoneNumber, address });
+
+  // Optionally, redirect or show a success message
+  alert('Account created successfully!');
+  createAccountPanel.style.display = 'none';
+  loginPanel.style.display = 'block';
+});
+</script>
+</body>
+</html>
