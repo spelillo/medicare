@@ -314,6 +314,7 @@
     </svg>
   </button>
 </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Welcome Section -->
     <div style="background:#eaf4fa;padding:2.2rem 1.2rem 2.2rem 1.2rem;display:flex;flex-direction:column;align-items:center;">
       <div style="font-size:2.2rem;font-weight:700;color:#2d3a4a;text-align:center;margin-bottom:1.1rem;">Welcome to the Medicare Mobile App</div>
@@ -368,29 +369,34 @@
       </script>
     </div>
     <!-- Main Cards Section -->
-    <div style="display:flex;flex-direction:column;gap:1rem;width:100%;padding:1.5rem 1.2rem 2.2rem 1.2rem;"></div>
-        <div class="fade-in" id="card-login" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
-          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
-            <i class="fas fa-user-plus" style="color:#18706e;font-size:1.3rem;"></i> Log in or create an account
-          </div>
-          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Access your information anytime, anywhere</div>
-          <button id="login-create-btn" style="background:#18706e;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Log in/Create Account</button>
+    <div style="display:flex;flex-direction:column;gap:1rem;width:100%;padding:1.5rem 1.2rem 2.2rem 1.2rem;">
+      <div class="fade-in" id="card-login" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+        <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
+          <i class="fas fa-user-plus" style="color:#18706e;font-size:1.3rem;"></i> Log in or create an account
         </div>
-        <div class="fade-in" id="card-plans" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
-          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;"> Find health & drug plans</div>
-          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Find & compare plans in your area</div>
-          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Plans Now</button>
+        <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Access your information anytime, anywhere</div>
+        <button id="login-create-btn" style="background:#18706e;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Log in/Create Account</button>
+      </div>
+      <div class="fade-in" id="card-plans" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+        <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
+          <i class="fas fa-bag-shopping" style="color:#18706e;font-size:1.3rem;"></i> Find health & drug plans
         </div>
-        <div class="fade-in" id="card-providers" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
-          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">Find care providers</div>
-          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Compare hospitals, nursing homes, & more</div>
-          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Providers Near Me</button>
+        <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Find & compare plans in your area</div>
+        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Plans Now</button>
+      </div>
+      <div class="fade-in" id="card-providers" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+        <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
+          <i class="fas fa-hospital-user" style="color:#18706e;font-size:1.3rem;"></i> Find care providers
         </div>
-        <div class="fade-in" id="card-help" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;">
-          <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">Talk to someone</div>
-          <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Contact Medicare & other helpful resources</div>
-          <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Get Help</button>
+        <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Compare hospitals, nursing homes, & more</div>
+        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Providers Near Me</button>
+      </div>
+      <div class="fade-in" id="card-help" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;">
+        <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
+          <i class="fas fa-headset" style="color:#18706e;font-size:1.3rem;"></i> Talk to someone
         </div>
+        <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Contact Medicare & other helpful resources</div>
+        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Get Help</button>
       </div>
     </div>
   </div>
