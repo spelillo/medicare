@@ -502,21 +502,28 @@
             <div style="background:#18706e;padding:2rem 1.2rem 1.5rem 1.2rem;display:flex;align-items:center;gap:2rem;">
               <div style="font-size:2.2rem;font-weight:700;color:#fff;margin-right:2rem;">Welcome</div>
               <div style="position:relative;">
-                <button id="find-resources-toggle" style="display:flex;align-items:center;gap:0.7rem;background:#fff;color:#18706e;font-size:1.15rem;font-weight:700;padding:0.7rem 1.2rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;">
-                  Find Resources
-                  <span id="find-resources-chevron" style="font-size:1.3rem;transition:transform 0.2s;">&#9662;</span>
-                </button>
-                <div id="providers-resources-dropdown" style="display:none;position:absolute;top:110%;right:0;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(44,62,80,0.13);min-width:220px;z-index:5200;overflow:hidden;">
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Doctors &amp; clinicians</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospitals</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Nursing homes including rehab services</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Home health services</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospice care</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Inpatient rehabilitation facilities</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Long-term care hospitals</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Dialysis facilities</button>
-                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Medical equipment &amp; suppliers</button>
-                </div>
+          <button id="find-resources-toggle" style="display:flex;align-items:center;gap:0.4rem;background:#fff;color:#18706e;font-size:1.05rem;font-weight:700;padding:0.5rem 0.9rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;min-width:unset;">
+            Find Resources
+            <span id="find-resources-chevron" style="font-size:1.1rem;transition:transform 0.2s;">&#9662;</span>
+          </button>
+          <div id="providers-resources-dropdown" style="display:none;position:absolute;top:110%;right:0;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(44,62,80,0.13);min-width:220px;z-index:5200;overflow:hidden;">
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Doctors &amp; clinicians</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospitals</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Nursing homes including rehab services</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Home health services</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospice care</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Inpatient rehabilitation facilities</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Long-term care hospitals</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Dialysis facilities</button>
+            <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Medical equipment &amp; suppliers</button>
+          </div>
+              </div>
+            </div>
+            <!-- Welcome message below header -->
+            <div id="find-providers-welcome-message" style="padding:2rem 1.2rem 0.5rem 1.2rem;">
+              <div style="font-size:1.35rem;font-weight:700;color:#2d3a4a;margin-bottom:0.7rem;">Welcome!</div>
+              <div style="font-size:1.08rem;color:#222;">
+          You can use this tool to find and compare different types of Medicare providers (like physicians, hospitals, nursing homes, and others). Use our maps and filters to help you identify providers that are right for you.
               </div>
             </div>
             <!-- Dynamic content area for Find Resources -->
@@ -598,25 +605,46 @@
                 const label = btn.textContent.trim();
                 if (resourceContent[label]) {
                   // Update content area below header
-                    contentArea.innerHTML = `
+                  contentArea.innerHTML = `
                     <div style="padding:2rem 1.2rem;">
                       <div style="font-size:1.45rem;font-weight:700;color:#2d3a4a;margin-bottom:0.5rem;">${resourceContent[label].title}</div>
                       <div style="font-size:1.08rem;color:#222;margin-bottom:1.5rem;">${resourceContent[label].desc}</div>
-                      <div style='display:flex;flex-wrap:wrap;gap:2rem 1.5rem;margin-bottom:1.5rem;'>
-                      <div style='flex:1 1 220px;min-width:180px;max-width:120px;margin-right:1rem;'>
-                        <div style='font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;'>MY LOCATION</div>
-                        <div style='font-size:0.97rem;color:#666;margin-bottom:0.5rem;'>Enter street, ZIP code, city, or state.</div>
-                        <input type='text' style='width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;' />
+                      <div style="display:flex;flex-direction:column;gap:1.2rem;margin-bottom:1.5rem;">
+                        <div style="flex:1;min-width:220px;max-width:30%;">
+                          <div style="font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;">MY LOCATION</div>
+                          <div style="font-size:0.97rem;color:#666;margin-bottom:0.5rem;">Enter street, ZIP code, city, or state.</div>
+                          <input id="find-location-input" type="text" style="width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;" />
+                        </div>
+                         <div style="flex:1;min-width:220px;max-width:60%;">
+                          <div style="font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;">NAME OR KEYWORD <span style="font-weight:400;">(optional)</span></div>
+                          <div style="font-size:0.97rem;color:#666;margin-bottom:0.5rem;">Enter a specialty, provider name, or group.</div>
+                          <input id="find-keyword-input" type="text" style="width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;" />
+                        </div>
                       </div>
-                      <div style='flex:1 1 220px;min-width:180px;max-width:260px;margin-left:1rem;'>
-                        <div style='font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;'>NAME OR KEYWORD <span style='font-weight:400;'>(optional)</span></div>
-                        <div style='font-size:0.97rem;color:#666;margin-bottom:0.5rem;'>Enter a specialty, provider name, or group.</div>
-                        <input type='text' style='width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;' />
-                      </div>
-                      </div>
-                      <button style='background:#bfc9d1;color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:5px;font-size:1rem;cursor:not-allowed;opacity:0.7;'>Search</button>
+                      <button id="find-search-btn" disabled style="background:#bfc9d1;color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:5px;font-size:1rem;cursor:not-allowed;opacity:0.7;">Search</button>
                     </div>
-                    `;
+                  `;
+                  // Add logic to enable/disable the search button
+                  const locationInput = document.getElementById('find-location-input');
+                  const keywordInput = document.getElementById('find-keyword-input');
+                  const searchBtn = document.getElementById('find-search-btn');
+                  function updateSearchBtn() {
+                    if ((locationInput.value && locationInput.value.trim() !== '') || (keywordInput.value && keywordInput.value.trim() !== '')) {
+                      searchBtn.disabled = false;
+                      searchBtn.style.background = '#18706e';
+                      searchBtn.style.cursor = 'pointer';
+                      searchBtn.style.opacity = '1';
+                    } else {
+                      searchBtn.disabled = true;
+                      searchBtn.style.background = '#bfc9d1';
+                      searchBtn.style.cursor = 'not-allowed';
+                      searchBtn.style.opacity = '0.7';
+                    }
+                  }
+                  locationInput.addEventListener('input', updateSearchBtn);
+                  keywordInput.addEventListener('input', updateSearchBtn);
+                  // Prevent form submission (visual only)
+                  searchBtn.addEventListener('click', function(e) { e.preventDefault(); });
                 }
                 dropdown.style.display = 'none';
                 chevron.style.transform = 'none';
@@ -643,7 +671,82 @@
               });
             }
           });
-        </script></div>
+        </script>
+        </div>
+        <div class="fade-in" id="card-help" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+          <div style="font-size:1.25rem;font-weight:700;color:#2d3a4a;margin-bottom:0.4rem;text-align:left;display:flex;align-items:center;gap:0.5rem;">
+            <span style="background:#eaf4fa;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;">
+              <i class="fas fa-phone" style="color:#18706e;font-size:1.5rem;"></i>
+            </span>
+            Talk to someone
+          </div>
+          <div style="font-size:1rem;color:#444;margin-bottom:1.2rem;">Contact Medicare &amp; other helpful resources</div>
+          <button id="get-help-btn" style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Get Help</button>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0e4d4b;z-index:5000;align-items:center;justify-content:center;overflow:auto;transition:background 0.5s cubic-bezier(.4,0,.2,1);">
+          <div style="width:100vw;max-width:100vw;height:100vh;max-height:100vh;overflow:auto;position:relative;display:flex;flex-direction:row;">
+            <!-- Close Button (moved inside modal content) -->
+            <button id="close-help-modal" style="position:absolute;top:1.2rem;right:2rem;background:none;border:none;font-size:2.5rem;cursor:pointer;color:#ffffff;z-index:5100;">&times;</button>
+            <!-- Help Modal Content: Dark Green Container, Higher on Page -->
+            <div style="flex:1;min-width:340px;max-width:540px;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#ffffff;border-radius:18px;padding:2.5rem 2.5rem 2rem 2.5rem;margin:2.5rem 2rem 2rem 2rem;box-shadow:0 2px 8px rgba(24,112,110,0.13);position:absolute;top:2.5rem;left:2.5rem;right:auto;">
+              <div style="font-size:2.3rem;font-weight:700;color:#444;margin-bottom:2rem;">Contact Medicare</div>
+              <div style="display:flex;flex-direction:column;gap:1.3rem;width:100%;">
+                <div style="font-size:1.08rem;color:#444;">
+                  Need help beyond what's on Medicare.gov?
+                </div>
+                <div style="font-size:1.08rem;color:#444;">
+                  You can talk or live chat with a real person, 24 hours a day, 7 days a week (except some federal holidays.)
+                </div>
+                <div style="display:flex;align-items:center;gap:0.8rem;">
+                  <i class="fas fa-phone" style="color:#444;font-size:1.4rem;"></i>
+                  <span style="font-size:1.13rem;font-weight:700;color:#444;">1-800-MEDICARE</span>
+                  <a href="tel:1-800-633-4227" style="color:#444;text-decoration:underline;font-size:1.08rem;">(1-800-633-4227)</a>
+                </div>
+                <div style="font-size:1.01rem;color:#444;">
+                  TTY users can call <a href="tel:1-877-486-2048" style="color:#444;text-decoration:underline;">1-877-486-2048</a>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.7rem;">
+                  <span style="background:#eaf4fa;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;">
+                    <img src="https://frontend.medicare.gov/assets/Icon_Chat-f1ad62dd.svg" alt="Chat icon" style="height:1.2em;width:auto;">
+                  </span>
+                  <button style="background:#18706e;color:#ffffff;font-size:1rem;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;">
+                    Start a Live Chat
+                  </button>
+                </div>
+                <div style="font-size:1rem;color:#0e4d4b;">
+                  If you have an account, 
+                  <a href="#" style="color:#731399;text-decoration:underline;">log in before you start your chat.</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Help modal logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const getHelpBtn = document.getElementById('get-help-btn');
+            const helpModal = document.getElementById('help-modal');
+            const closeHelpModal = document.getElementById('close-help-modal');
+            if (getHelpBtn && helpModal && closeHelpModal) {
+              getHelpBtn.addEventListener('click', function() {
+                helpModal.style.display = 'flex';
+              });
+              closeHelpModal.addEventListener('click', function() {
+                helpModal.style.display = 'none';
+              });
+              helpModal.addEventListener('click', function(e) {
+                if (e.target === helpModal) helpModal.style.display = 'none';
+              });
+            }
+          });
+        </script>
+
+
+
+
+
       </div>
       
     </div>
