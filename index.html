@@ -382,22 +382,270 @@
           <i class="fas fa-bag-shopping" style="color:#18706e;font-size:1.3rem;"></i> Find health & drug plans
         </div>
         <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Find & compare plans in your area</div>
-        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Plans Now</button>
-      </div>
-      <div class="fade-in" id="card-providers" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
+        <button id="find-plans-btn" style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Plans Now</button>
+
+        <!-- Find Plans Modal -->
+        <div id="find-plans-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fff;z-index:5000;align-items:center;justify-content:center;overflow:auto;">
+          <div style="width:100vw;max-width:100vw;height:100vh;max-height:100vh;overflow:auto;position:relative;display:flex;flex-direction:column;">
+            <button id="close-find-plans-modal" style="position:absolute;top:1.2rem;right:2rem;background:none;border:none;font-size:2.5rem;cursor:pointer;color:#18706e;z-index:5100;">&times;</button>
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:100%;padding:2.5rem 0 0 0;">
+              <div style="font-size:2.2rem;font-weight:700;color:#2d3a4a;text-align:center;margin-bottom:1.2rem;">Explore your Medicare coverage options</div>
+              <div style="font-size:1.18rem;color:#222;text-align:center;margin-bottom:2rem;">Get more coverage, once you have Part A and/or Part B.</div>
+              <div style="width:100%;max-width:700px;">
+          <div style="display:flex;justify-content:center;margin-bottom:1.2rem;"></div>
+            <a href="https://www.medicare.gov/plan-compare/#/new-to-medicare?year=2025&lang=en" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.5rem;font-size:1.05rem;color:#1a5a96;text-decoration:underline;">
+              
+              <span style="display:block;width:100%;text-align:center;">First time joining a Medicare health or drug plan?</span>
+            </a>
+          </div>
+          </a>
+          <div style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);border:1.5px solid #e0e0e0;padding:2rem 1.5rem;display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+            <div style="flex:1 1 320px;min-width:280px;max-width:340px;background:#eaf4fa;border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;align-items:flex-start;">
+              <div style="font-weight:700;font-size:1.15rem;margin-bottom:0.7rem;">
+                <span style="background:#18706e;color:#fff;border-radius:50%;padding:0.4rem 0.7rem;margin-right:0.7rem;"><i class="fas fa-user"></i></span>
+                Use your account
+              </div>
+              <div style="font-size:1.08rem;margin-bottom:1.1rem;">Save time by logging in</div>
+              <ul style="font-size:1rem;color:#222;margin-bottom:1.1rem;padding-left:1.2rem;">
+                <li>Get a summary of your current coverage</li>
+                <li>Use your saved drugs & pharmacies to compare plan costs</li>
+              </ul>
+              <button id="find-plans-login-btn" style="background:#18706e;color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:5px;font-size:1rem;cursor:pointer;margin-bottom:0.7rem;">Log In</button>
+              <script>
+                // Log In button in Find Plans modal navigates to login panel
+                document.addEventListener('DOMContentLoaded', function() {
+                  const loginBtn = document.getElementById('find-plans-login-btn');
+                  if (loginBtn) {
+                    loginBtn.addEventListener('click', function() {
+                      document.getElementById('find-plans-modal').style.display = 'none';
+                      document.getElementById('home-page').style.display = 'none';
+                      document.getElementById('login-panel').style.display = 'block';
+                    });
+                  }
+                });
+              </script>
+              <div style="font-size:0.97rem;">
+                Don't have an account?
+                <a href="#" style="color:#1a5a96;text-decoration:underline;" id="find-plans-create-account-link">Create one.</a>
+              </div>
+              <script>
+                // "Create one" link in Find Plans modal navigates to create account panel
+                document.addEventListener('DOMContentLoaded', function() {
+                  const createLink = document.getElementById('find-plans-create-account-link');
+                  if (createLink) {
+                    createLink.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      document.getElementById('find-plans-modal').style.display = 'none';
+                      document.getElementById('login-panel').style.display = 'none';
+                      document.getElementById('home-page').style.display = 'none';
+                      document.getElementById('create-account-panel').style.display = 'flex';
+                    });
+                  }
+                });
+              </script>
+            </div>
+            <div style="flex:1 1 320px;min-width:280px;max-width:340px;background:#f7fbfd;border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;align-items:flex-start;">
+              <div style="font-weight:700;font-size:1.15rem;margin-bottom:0.7rem;">
+                <span style="background:#18706e;color:#fff;border-radius:50%;padding:0.4rem 0.7rem;margin-right:0.7rem;"><i class="fas fa-lock"></i></span>
+                Continue without logging in
+              </div>
+              <form style="width:100%;margin-top:1.1rem;">
+                <label for="find-plans-zipcode" style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;display:block;">Enter your ZIP code:</label>
+                <input id="find-plans-zipcode" type="text" maxlength="5" style="width:93%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;" />
+                <button type="submit" style="background:#18706e;color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:5px;font-size:1rem;cursor:pointer;">Continue</button>
+              </form>
+            </div>
+          </div>
+            <div style="margin-top:2rem;text-align:center;">
+            <a href="https://www.medicare.gov/plan-compare/#/pace?year=2025&lang=en" target="_blank" rel="noopener" style="color:#1a5a96;text-decoration:underline;font-size:1rem;">Looking for PACE plans?</a>
+          </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Find Plans modal logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const findPlansBtn = document.getElementById('find-plans-btn');
+            const findPlansModal = document.getElementById('find-plans-modal');
+            const closeFindPlansModal = document.getElementById('close-find-plans-modal');
+            if (findPlansBtn && findPlansModal && closeFindPlansModal) {
+              findPlansBtn.addEventListener('click', function() {
+          findPlansModal.style.display = 'flex';
+              });
+              closeFindPlansModal.addEventListener('click', function() {
+          findPlansModal.style.display = 'none';
+              });
+              findPlansModal.addEventListener('click', function(e) {
+          if (e.target === findPlansModal) findPlansModal.style.display = 'none';
+              });
+            }
+          });
+        </script>
+        </form>
+      
+        
+        <div class="fade-in" id="card-providers" style= "background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-bottom:0.7rem;">
         <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
           <i class="fas fa-hospital-user" style="color:#18706e;font-size:1.3rem;"></i> Find care providers
         </div>
         <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Compare hospitals, nursing homes, & more</div>
-        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Providers Near Me</button>
-      </div>
-      <div class="fade-in" id="card-help" style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);padding:1.1rem 1rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;">
-        <div style="font-size:1.15rem;font-weight:700;color:#2d3a4a;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;">
-          <i class="fas fa-headset" style="color:#18706e;font-size:1.3rem;"></i> Talk to someone
+        <!-- Find Providers Near Me Button -->
+        <button id="find-providers-btn" style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Find Providers Near Me</button>
+
+        <!-- Find Providers Modal -->
+        <div id="find-providers-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fff;z-index:5000;align-items:center;justify-content:center;overflow:auto;">
+          <div style="width:100vw;max-width:100vw;height:100vh;max-height:100vh;overflow:auto;position:relative;display:flex;flex-direction:column;">
+            <!-- Close Button (moved inside modal content) -->
+            <button id="close-find-providers-modal" style="position:absolute;top:1.2rem;right:2rem;background:none;border:none;font-size:2.5rem;cursor:pointer;color:#ffffff;z-index:5100;">&times;</button>
+            <!-- Green Header: Welcome + Find Resources inline -->
+            <div style="background:#18706e;padding:2rem 1.2rem 1.5rem 1.2rem;display:flex;align-items:center;gap:2rem;">
+              <div style="font-size:2.2rem;font-weight:700;color:#fff;margin-right:2rem;">Welcome</div>
+              <div style="position:relative;">
+                <button id="find-resources-toggle" style="display:flex;align-items:center;gap:0.7rem;background:#fff;color:#18706e;font-size:1.15rem;font-weight:700;padding:0.7rem 1.2rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;">
+                  Find Resources
+                  <span id="find-resources-chevron" style="font-size:1.3rem;transition:transform 0.2s;">&#9662;</span>
+                </button>
+                <div id="providers-resources-dropdown" style="display:none;position:absolute;top:110%;right:0;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(44,62,80,0.13);min-width:220px;z-index:5200;overflow:hidden;">
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Doctors &amp; clinicians</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospitals</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Nursing homes including rehab services</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Home health services</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Hospice care</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Inpatient rehabilitation facilities</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Long-term care hospitals</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Dialysis facilities</button>
+                  <button class="providers-dropdown-item" style="width:100%;background:none;border:none;text-align:left;padding:1rem 1.2rem;font-size:1.08rem;color:#18706e;font-weight:600;cursor:pointer;">Medical equipment &amp; suppliers</button>
+                </div>
+              </div>
+            </div>
+            <!-- Dynamic content area for Find Resources -->
+            <div id="find-resources-content-area"></div>
+            <!-- Placeholder for future content -->
+            <div style="padding:2rem 1.2rem;">
+              <!-- You can add more content here later -->
+            </div>
+          </div>
         </div>
-        <div style="font-size:0.98rem;color:#444;margin-bottom:0.8rem;">Contact Medicare & other helpful resources</div>
-        <button style="background:#0e4d4b;color:#fff;font-size:1rem;font-weight:700;padding:0.6rem 1rem;border:none;border-radius:7px;box-shadow:0 1px 4px rgba(24,112,110,0.08);cursor:pointer;width:93%;">Get Help</button>
+        <script>
+          // Dropdown logic for Find Resources with dynamic content update below header
+          document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('find-resources-toggle');
+            const dropdown = document.getElementById('providers-resources-dropdown');
+            const chevron = document.getElementById('find-resources-chevron');
+            const contentArea = document.getElementById('find-resources-content-area');
+            let open = false;
+
+            // Resource content map
+            const resourceContent = {
+              'Doctors & clinicians': {
+                title: 'Find doctors & clinicians near me',
+                desc: 'Find general information about doctors, clinicians and groups enrolled in Medicare.'
+              },
+              'Hospitals': {
+                title: 'Find hospitals near me',
+                desc: 'Find and compare hospitals enrolled in Medicare.'
+              },
+              'Nursing homes including rehab services': {
+                title: 'Find nursing homes near me',
+                desc: 'Find and compare nursing homes, including those offering rehab services.'
+              },
+              'Home health services': {
+                title: 'Find home health services near me',
+                desc: 'Find agencies that provide home health services covered by Medicare.'
+              },
+              'Hospice care': {
+                title: 'Find hospice care near me',
+                desc: 'Find hospice care providers enrolled in Medicare.'
+              },
+              'Inpatient rehabilitation facilities': {
+                title: 'Find inpatient rehabilitation facilities near me',
+                desc: 'Find and compare inpatient rehabilitation facilities.'
+              },
+              'Long-term care hospitals': {
+                title: 'Find long-term care hospitals near me',
+                desc: 'Find and compare long-term care hospitals.'
+              },
+              'Dialysis facilities': {
+                title: 'Find dialysis facilities near me',
+                desc: 'Find and compare dialysis facilities covered by Medicare.'
+              },
+              'Medical equipment & suppliers': {
+                title: 'Find medical equipment & suppliers near me',
+                desc: 'Find suppliers of medical equipment and supplies covered by Medicare.'
+              }
+            };
+
+            toggle.addEventListener('click', function(e) {
+              e.stopPropagation();
+              open = !open;
+              dropdown.style.display = open ? 'block' : 'none';
+              chevron.style.transform = open ? 'rotate(180deg)' : 'none';
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+              if (open && !toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+                chevron.style.transform = 'none';
+                open = false;
+              }
+            });
+
+            // Handle dropdown selection and update modal content
+            dropdown.querySelectorAll('.providers-dropdown-item').forEach(function(btn) {
+              btn.addEventListener('click', function() {
+                const label = btn.textContent.trim();
+                if (resourceContent[label]) {
+                  // Update content area below header
+                    contentArea.innerHTML = `
+                    <div style="padding:2rem 1.2rem;">
+                      <div style="font-size:1.45rem;font-weight:700;color:#2d3a4a;margin-bottom:0.5rem;">${resourceContent[label].title}</div>
+                      <div style="font-size:1.08rem;color:#222;margin-bottom:1.5rem;">${resourceContent[label].desc}</div>
+                      <div style='display:flex;flex-wrap:wrap;gap:2rem 1.5rem;margin-bottom:1.5rem;'>
+                      <div style='flex:1 1 220px;min-width:180px;max-width:120px;margin-right:1rem;'>
+                        <div style='font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;'>MY LOCATION</div>
+                        <div style='font-size:0.97rem;color:#666;margin-bottom:0.5rem;'>Enter street, ZIP code, city, or state.</div>
+                        <input type='text' style='width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;' />
+                      </div>
+                      <div style='flex:1 1 220px;min-width:180px;max-width:260px;margin-left:1rem;'>
+                        <div style='font-size:1.01rem;font-weight:600;margin-bottom:0.2rem;'>NAME OR KEYWORD <span style='font-weight:400;'>(optional)</span></div>
+                        <div style='font-size:0.97rem;color:#666;margin-bottom:0.5rem;'>Enter a specialty, provider name, or group.</div>
+                        <input type='text' style='width:100%;padding:0.7rem 0.8rem;border:2px solid #bfc9d1;border-radius:5px;font-size:1.1rem;background:#fff;margin-bottom:0.7rem;' />
+                      </div>
+                      </div>
+                      <button style='background:#bfc9d1;color:#fff;font-weight:700;padding:0.7rem 1.5rem;border:none;border-radius:5px;font-size:1rem;cursor:not-allowed;opacity:0.7;'>Search</button>
+                    </div>
+                    `;
+                }
+                dropdown.style.display = 'none';
+                chevron.style.transform = 'none';
+                open = false;
+              });
+            });
+          });
+        </script>
+        <script>
+          // Find Providers modal logic
+          document.addEventListener('DOMContentLoaded', function() {
+            const findProvidersBtn = document.getElementById('find-providers-btn');
+            const findProvidersModal = document.getElementById('find-providers-modal');
+            const closeFindProvidersModal = document.getElementById('close-find-providers-modal');
+            if (findProvidersBtn && findProvidersModal && closeFindProvidersModal) {
+              findProvidersBtn.addEventListener('click', function() {
+                findProvidersModal.style.display = 'flex';
+              });
+              closeFindProvidersModal.addEventListener('click', function() {
+                findProvidersModal.style.display = 'none';
+              });
+              findProvidersModal.addEventListener('click', function(e) {
+                if (e.target === findProvidersModal) findProvidersModal.style.display = 'none';
+              });
+            }
+          });
+        </script></div>
       </div>
+      
     </div>
   </div>
 </div>
